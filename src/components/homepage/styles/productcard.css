@@ -1,0 +1,34 @@
+.productcard {
+    width: 250px;
+    border: solid 1px;
+    padding: 20px;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.productcard__img {
+    cursor: pointer;
+    width: 100%;
+    height: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    justify-content: center;
+}
+.productcard hr {
+    margin: 10px 0;
+}
+.productcard__item {
+    display: flex;
+    flex-direction: column;
+}
+.productcard__item span:last-child {
+    padding: 15px;
+}
+.productcard__btn {
+    display: flex;
+    justify-content: center;
+}
+    
