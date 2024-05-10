@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { Link, useNavigate } from 'react-router-dom'
 import useAuth from '../hooks/useAuth'
+import './styles/login.css'
 
 const Login = () => {
 
@@ -22,12 +23,10 @@ const Login = () => {
       email: '',
       password: '',
     })
-/*     setTimeout(()=> {
-      setHasToken(localStorage.getItem('token'))
-      navigate('/cart')
-    }, 3000)  
-    
-    }  */ 
+
+    setHasToken(localStorage.getItem('token'))
+    navigate('/cart')
+
   }
     const handleLogout = ()=> {
       localStorage.removeItem('token')
@@ -40,8 +39,8 @@ const Login = () => {
         hasToken ?
           <button onClick={handleLogout}>Logout</button>
         :
-          <div>
-            <form onSubmit={handleSubmit(submit)}>
+          <div className='login'>
+            <form className='login__form' onSubmit={handleSubmit(submit)}>
               <div>
                 <label htmlFor="email">✉️ Email</label>
                 <input {...register('email')} id='email' type="email" />

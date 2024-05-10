@@ -1,4 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
+import axios from "axios";
+import getToken from "../../utils/getToken";
+
+const url ='https://e-commerce-api-v2.academlo.tech/api/v1/purchases'
 
 const purchases = createSlice({
     name: 'purchases',
@@ -11,3 +15,15 @@ const purchases = createSlice({
 export const { setPurchases } = purchases.actions
 
 export default purchases.reducer
+
+export const getPruchasesThunk = () => (dispatch) => {
+    axios.get(url, getToken())
+        .then(res => dispatch(setPurchases(res.data)))
+        .catch(err => console.log(err))
+}
+
+export const postPruchasesThunk = (data) => (dispatch) => {
+    axios.post(url, data, getToken())
+        .then(res => dispatch(setPurchases(res.data)))
+        .catch(err => console.log(err))
+}

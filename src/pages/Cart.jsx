@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { getCartThunk } from '../store/slices/cart.slice'
+import { getCartThunk, setCart } from '../store/slices/cart.slice'
 import CartProd from '../components/cart/CartProd'
 import './styles/cart.css'
+import { postPruchasesThunk } from '../store/slices/purchases.slice'
 
 const Cart = () => {
 
@@ -13,8 +14,11 @@ const Cart = () => {
   useEffect(() => {
     dispatch(getCartThunk('/cart'))
   }, [])
-  
-  console.log(cart)
+
+  const handleBuy = ()=> {
+    dispatch(postPruchasesThunk('')) 
+    dispatch(setCart([]))
+  }
 
   return (
     <>
@@ -28,14 +32,14 @@ const Cart = () => {
           ))
         }
       </div>
-      <div cart__totals>
+      <div className='cart__totals'>
         <p>Total Products: {cart.reduce((ca, pr)=> {
           return ca + pr.quantity
           }, 0)}</p>
         <p>Total Price $ {cart.reduce((ca, pr)=> {
           return ca + (pr.quantity * pr.product?.price)
         }, 0)}</p>
-        <BUtton>Buy</BUtton>
+        <button onClick={handleBuy}>Buy</button>
       </div>
     </>
   )

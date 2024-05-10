@@ -5,6 +5,8 @@ import './styles/homepage.css'
 import FilterPrice from '../components/homepage/FilterPrice'
 import FilterCategory from '../components/homepage/FilterCategory'
 
+const body = document.querySelector('body')
+
 const HomePage = () => {
 
     const [prodPrice, setProdPrice] = useState({
@@ -32,17 +34,27 @@ const HomePage = () => {
         const perCategory = prodCategory ? prod.categoryId === +prodCategory : prod
         return perName && perPrice && perCategory
     }
+    
+    const handleDark = () => {
+        body.classList.toggle('dark')
+    }
 
   return (
     <div className='homepage'>
         <div className='homepage__filter'>
-            <input ref={textInput} onChange={handleChange} type="text" />
+            <div className='homepage__filtername'>
+                <input ref={textInput} onChange={handleChange} type="text" />
+                <button>🔎</button>
+            </div>
             <FilterPrice
                 setProdPrice={setProdPrice}
             />
-            <FilterCategory
-                setProdCategory={setProdCategory}
-            />
+            <div className='homepage__conte'>
+                <FilterCategory
+                    setProdCategory={setProdCategory}
+                />
+                <button className='homepage__btn' onClick={handleDark}>Mode</button>
+            </div>
         </div>
         <div className='homepage__container'>
             {

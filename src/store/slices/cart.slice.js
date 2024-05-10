@@ -11,10 +11,16 @@ const cart = createSlice({
         setCart: (_value, action) => action.payload,
         addCart: (value, action) => {value.push(action.payload)},
         delCart: (value, action) => value.filter(Prod => Prod.id !== action.payload),
+        updCart: (value, action) => value.map(prod => {
+            const {quantity, id} = action.payload
+            return prod.id === id ?
+            {...prod, quantity: quantity} :
+            prod
+        }),
     }
 })
 
-export const { setCart, addCart, delCart} = cart.actions
+export const { setCart, addCart, delCart, updCart} = cart.actions
 
 export default cart.reducer
 
@@ -39,5 +45,12 @@ export const deleteCartThunk = (path, id) => dispatch => {
             dispatch(delCart(id))
             console.log('Delete Successfully')
         })
+        .catch(err => console.log(err)) 
+}
+
+export const putCartThunk = (path, data, id) => (dispatch) => {
+    const url =  `${urlBase}${path}/${id}`
+    axios.put(url, data, getToken())
+        .then(res => dispatch(updCart(res.data)))
         .catch(err => console.log(err))
 }

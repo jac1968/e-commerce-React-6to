@@ -25,15 +25,18 @@ const ProductCard = ({prod}) => {
   return (
   
     <article className='productcard'>
-        <figure onClick={handleprod} className='productcard__img'>
-          <img src={prod.images[0].url} alt="Product Picture" />
+        <figure  className='productcard__img'>
+          <img  className='productcard__img-1' src={prod.images[0].url} alt="Product Picture" />
+          <img onClick={handleprod} className='productcard__img-2' src={prod.images[1].url} alt="Product Picture" />
         </figure>
         <hr />
         <ul className='productcard__list'> 
           <li className='productcard__item'><span>{prod.band}</span><span>{prod.title}</span></li>
           <li className='productcard__item'><span>Precio</span><span> $ {prod.price}</span></li>
         </ul>
-        <button onClick={handleBuy} className='productcard__btn'>Comprar</button>
+        <div className='productcard__btn'>
+            <button onClick={handleBuy} >Comprar</button>
+        </div>
     </article>
   )
 }
